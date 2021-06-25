@@ -12,7 +12,7 @@ namespace BmiJs.Controllers
     public class BmiJsController : ControllerBase
     {
 
-        public string Bmicaculater(float Bmitotal)
+        private string Bmicaculater(double Bmitotal)
         {
             if(Bmitotal>24.9)
             {
@@ -32,14 +32,31 @@ namespace BmiJs.Controllers
             }
 
         }
+        //เกิดErrorขึ้นเนื่องจาก ไม่ใส่ค่าในพารามิเตอร์
         [HttpPost()]
-        public string GetBmi(BmiApi Bmi){
-            var Bmitotal = Bmi.Weight / ((Bmi.Height/100)*(Bmi.Height/100));
+        public BmiAndDes GetBmi(){
+            
+            BmiApi Bmi = new BmiApi();
+            double Bmitotal = Bmi.Weight / ((Bmi.Height/100.0) * (Bmi.Height/100.0)) ;
             var Quality = Bmicaculater(Bmitotal);
-            return "ดัชนี้มวลกลายของคุณ คือ " + Bmitotal + "คุณ "+ Quality ;
-
-
+            return  new BmiAndDes {
+                  Bmi = Bmitotal,
+                  Des = Quality 
+            };//"ดัชนี้มวลกลายของคุณ คือ " + Bmitotal + "คุณ "+ Quality ;
         }
+        //แก้โดยการส่งค่ากลับเป็นคลาส แต่อย่าลืมรับค่าสองตัวได้แก่ Weight Height
+        [HttpPost()]
+        public BmiAndDes GetBmi2(BmiApi Bmi){
+            
+            double Bmitotal = Bmi.Weight / ((Bmi.Height/100.0) * (Bmi.Height/100.0)) ;
+            var Quality = Bmicaculater(Bmitotal);
+            return    new BmiAndDes {
+                  Bmi = Bmitotal,
+                  Des = Quality 
+            };//"ดัชนี้มวลกลายของคุณ คือ " + Bmitotal + "คุณ "+ Quality ;
+        }
+
+        
 
 
        

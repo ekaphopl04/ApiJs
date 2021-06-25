@@ -122,10 +122,11 @@ var onclick = function onclick() {
   console.log("click ...");
   var Height = document.getElementById("HeightTextBox").value;
   var Weight = document.getElementById("WeightTextBox").value;
-  axios.post("http://localhost:5000/api/BmiJs/GetBmi", {
+  axios.post("http://localhost:5000/api/BmiJs/GetBmi2", {
     Weight: Weight,
     Height: Height
-  }).then(function (response) {
+  }) //{ Weight : Weight, Height: Height   }
+  .then(function (response) {
     console.log(response.data);
   }).catch(function (error) {
     console.log(error);
@@ -162,7 +163,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63542" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55685" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
